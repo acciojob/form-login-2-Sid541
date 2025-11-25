@@ -1,58 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Form — Alert on Submit</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Login</title>
 </head>
 <body>
-  <main class="container">
-    <form id="infoForm" class="card" autocomplete="off" novalidate>
-      <h1>Enter your details</h1>
+    <form id="myForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="First Name"><br>
 
-      <label for="firstName">First Name</label>
-      <!-- name attribute must be exactly "First Name" per acceptance criteria -->
-      <input id="firstName" name="First Name" type="text" required placeholder="e.g. Siddharth">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="Last Name"><br>
 
-      <label for="lastName">Last Name</label>
-      <input id="lastName" name="Last Name" type="text" required placeholder="e.g. Kumar">
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="Phone Number"><br>
 
-      <label for="phone">Phone Number</label>
-      <input id="phone" name="Phone Number" type="tel" inputmode="tel" required placeholder="e.g. 9876543210">
+        <label for="email">Email ID:</label>
+        <input type="email" id="email" name="Email ID"><br>
 
-      <label for="email">Email ID</label>
-      <input id="email" name="Email ID" type="email" required placeholder="e.g. you@example.com">
-
-      <button type="submit" class="btn">Submit</button>
+        <button type="submit">Submit</button>
     </form>
-  </main>
 
-  <script>
-    // Small script to build the alert exactly in the requested format:
-    // Each line: Label (with spaces exactly as the name attribute) + single space + value
-    // Example:
-    // First Name Siddharth
-    // Last Name Kumar
-    // Phone Number 9876543210
-    // Email ID you@example.com
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting normally
 
-    document.getElementById('infoForm').addEventListener('submit', function (e) {
-      e.preventDefault();
+            // Get values from input fields
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const email = document.getElementById('email').value;
 
-      const form = e.currentTarget;
-      // Using form.elements with the exact name attributes (they contain spaces)
-      const keys = ['First Name', 'Last Name', 'Phone Number', 'Email ID'];
-
-      const lines = keys.map(key => {
-            const el = form.elements[key];
-        const value = el ? el.value.trim() : '';
-        return key + (value ? ' ' + value : ' ');
-      });
-
-
-      alert(lines.join('\n'));
-    });
-  </script>
+            // Create alert message
+            const alertMessage = `First Name: ${firstName}\nLast Name: ${lastName}\nPhone Number: ${phoneNumber}\nEmail ID: ${email}`;
+            alert(alertMessage);
+        });
+    </script>
 </body>
 </html>
